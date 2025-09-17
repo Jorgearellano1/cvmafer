@@ -69,19 +69,13 @@ const fadeUp: Variants = {
   show: (custom?: number) => ({
     y: 0,
     opacity: 1,
-    transition: {
-      duration: 0.5,
-      delay: 0.06 * (custom ?? 0),
-      // ease: [0.22, 1, 0.36, 1],
-    },
+    transition: { duration: 0.5, delay: 0.06 * (custom ?? 0) },
   }),
 };
 
 const stagger: Variants = {
   hidden: {},
-  show: {
-    transition: { staggerChildren: 0.06 },
-  },
+  show: { transition: { staggerChildren: 0.06 } },
 };
 
 export default function Home() {
@@ -121,9 +115,13 @@ function Nav() {
           {CV.name}
         </span>
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Abrir en nueva pestaña para móviles (mejor compatibilidad) */}
           <a
             href={CV.pdf}
-            className="group inline-flex items-center gap-2 rounded-xl border border-border px-3 py-1.5 text-xs sm:text-sm bg-[color:var(--muted)] hover:shadow-[0_8px_24px_rgba(231,111,81,0.10)] transition"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Abrir CV en PDF (se abre en una nueva pestaña)"
+            className="group inline-flex items-center gap-2 rounded-xl border border-border px-3 py-1.5 text-xs sm:text-sm bg-[color:var(--muted)] hover:shadow-[0_8px_24px_rgba(231,111,81,0.10)] transition touch-manipulation"
           >
             <FileText className="h-4 w-4" />
             CV PDF
@@ -158,8 +156,8 @@ function ProfilePhoto() {
           width={512}
           height={512}
           priority
-          className="block h-auto w-32 xs:w-36 sm:w-48 md:w-56 rounded-2xl object-cover"
-          sizes="(min-width: 1024px) 14rem, (min-width: 640px) 12rem, 9rem"
+          className="block h-auto w-32 sm:w-44 md:w-56 rounded-2xl object-cover"
+          sizes="(min-width: 1024px) 14rem, (min-width: 640px) 11rem, 8rem"
         />
       </div>
 
