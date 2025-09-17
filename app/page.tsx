@@ -113,17 +113,17 @@ function Nav() {
   return (
     <div className="sticky top-0 z-40 border-b border-border/80 bg-[color:var(--background)]/80 backdrop-blur">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-        <span className="font-semibold tracking-tight">
+        <span className="font-semibold tracking-tight text-sm sm:text-base">
           <span
             className="mr-2 inline-block h-2 w-2 rounded-full align-middle"
             style={{ background: "var(--color-brand-1)" }}
           />
           {CV.name}
         </span>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <a
             href={CV.pdf}
-            className="group inline-flex items-center gap-2 rounded-xl border border-border px-3 py-1.5 text-sm bg-[color:var(--muted)] hover:shadow-[0_8px_24px_rgba(231,111,81,0.10)] transition"
+            className="group inline-flex items-center gap-2 rounded-xl border border-border px-3 py-1.5 text-xs sm:text-sm bg-[color:var(--muted)] hover:shadow-[0_8px_24px_rgba(231,111,81,0.10)] transition"
           >
             <FileText className="h-4 w-4" />
             CV PDF
@@ -145,14 +145,12 @@ function ProfilePhoto() {
       transition={{ duration: 0.55 }}
       whileHover={{ y: -4, rotate: -0.4, scale: 1.02 }}
       whileTap={{ scale: 0.99 }}
-      className="relative rounded-3xl border border-border bg-[color:var(--muted)] overflow-hidden shadow-[0_1px_0_rgba(0,0,0,0.03)]"
+      className="relative mx-auto md:mx-0 rounded-3xl border border-border bg-[color:var(--muted)] overflow-hidden shadow-[0_1px_0_rgba(0,0,0,0.03)]"
       style={{
-        // anillo suave con conic-gradient
         backgroundImage:
           "conic-gradient(from 180deg at 50% 50%, rgba(233,196,106,0.18), rgba(244,162,97,0.12), rgba(233,196,106,0.18))",
       }}
     >
-      {/* máscara para que el anillo no invada la foto */}
       <div className="p-1 rounded-[calc(theme(borderRadius.2xl)+4px)] bg-[color:var(--muted)]">
         <Image
           src={CV.photo}
@@ -160,12 +158,11 @@ function ProfilePhoto() {
           width={512}
           height={512}
           priority
-          className="block h-auto w-40 sm:w-48 md:w-56 rounded-2xl object-cover"
-          sizes="(min-width: 768px) 14rem, 12rem"
+          className="block h-auto w-32 xs:w-36 sm:w-48 md:w-56 rounded-2xl object-cover"
+          sizes="(min-width: 1024px) 14rem, (min-width: 640px) 12rem, 9rem"
         />
       </div>
 
-      {/* puntito de estado */}
       <span
         aria-hidden
         className="absolute right-2 bottom-2 h-3 w-3 rounded-full ring-2 ring-white"
@@ -178,22 +175,22 @@ function ProfilePhoto() {
 // ====== Hero cálido (sin desvanecido), ahora con foto ======
 function Hero() {
   return (
-    <section className="relative mx-auto max-w-6xl px-4 pt-14 pb-10">
-      <div className="grid gap-6 md:gap-8 md:grid-cols-[auto_1fr] items-start">
+    <section className="relative mx-auto max-w-6xl px-4 pt-10 sm:pt-12 md:pt-14 pb-8 sm:pb-10">
+      <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-5 sm:gap-6 md:gap-8 items-start justify-items-center md:justify-items-start">
         {/* Foto */}
         <ProfilePhoto />
 
         {/* Texto */}
-        <div>
+        <div className="w-full">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-[color:var(--muted)] px-3 py-1 text-xs text-muted-foreground">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-[color:var(--muted)] px-3 py-1 text-xs text-muted-foreground self-center md:self-auto">
               <Sparkles className="h-3.5 w-3.5" />
               Disponible para prácticas / junior
             </div>
           </motion.div>
 
           <motion.h1
-            className="mt-5 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight"
+            className="mt-4 sm:mt-5 text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-center md:text-left text-balance"
             initial="hidden"
             animate="show"
             variants={fadeUp}
@@ -202,7 +199,7 @@ function Hero() {
           </motion.h1>
 
           <motion.p
-            className="mt-3 text-lg text-foreground/80"
+            className="mt-3 text-base sm:text-lg text-foreground/80 text-center md:text-left text-pretty"
             initial="hidden"
             animate="show"
             custom={1}
@@ -212,7 +209,7 @@ function Hero() {
           </motion.p>
 
           <motion.p
-            className="mt-2 max-w-2xl text-muted-foreground"
+            className="mt-2 max-w-2xl text-muted-foreground text-center md:text-left text-pretty mx-auto md:mx-0"
             initial="hidden"
             animate="show"
             custom={2}
@@ -222,20 +219,20 @@ function Hero() {
           </motion.p>
 
           <motion.div
-            className="mt-6 flex flex-wrap items-center gap-3"
+            className="mt-5 sm:mt-6 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 justify-center md:justify-start"
             initial="hidden"
             animate="show"
             custom={3}
             variants={fadeUp}
           >
-            <a href={`mailto:${CV.email}`} className="btn-white">
+            <a href={`mailto:${CV.email}`} className="btn-white w-full sm:w-auto justify-center">
               <Mail className="h-4 w-4" />
               Escribir a {CV.email}
             </a>
             <a
               target="_blank"
               href={CV.linkedin}
-              className="inline-flex items-center gap-2 rounded-2xl border border-border px-4 py-2 bg-[color:var(--muted)] hover:shadow-[0_8px_24px_rgba(244,162,97,0.12)] transition"
+              className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-2xl border border-border px-4 py-2 bg-[color:var(--muted)] hover:shadow-[0_8px_24px_rgba(244,162,97,0.12)] transition"
             >
               <Linkedin className="h-4 w-4" />
               LinkedIn
@@ -257,17 +254,17 @@ function InfoStripe() {
   return (
     <div className="mx-auto max-w-6xl px-4">
       <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
           {items.map((it, i) => (
             <motion.div
               key={i}
               custom={i}
               variants={fadeUp}
               whileHover={{ y: -2 }}
-              className="rounded-2xl border border-border bg-[color:var(--muted)] px-4 py-3 flex items-center gap-2 shadow-[0_1px_0_rgba(0,0,0,0.02)]"
+              className="rounded-2xl border border-border bg-[color:var(--muted)] px-3.5 sm:px-4 py-3 flex items-center gap-2 shadow-[0_1px_0_rgba(0,0,0,0.02)]"
             >
               <span className="text-muted-foreground">{it.icon}</span>
-              <span className="text-sm">
+              <span className="text-sm truncate">
                 {i === 2 ? (
                   <a
                     href={CV.linkedin}
@@ -291,7 +288,7 @@ function InfoStripe() {
 // ====== Secciones principales ======
 function Sections() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12 space-y-16">
+    <section className="mx-auto max-w-6xl px-4 py-10 sm:py-12 space-y-12 sm:space-y-16">
       <Block title="Experiencia" k="exp">
         <Timeline items={CV.experience} accent="brand-1" />
       </Block>
@@ -305,7 +302,7 @@ function Sections() {
       </Block>
 
       <Block title="Logros & Actividades" k="highlights">
-        <ul className="grid gap-3 sm:grid-cols-2">
+        <ul className="grid gap-2.5 sm:gap-3 sm:grid-cols-2">
           {CV.highlights.map((h, i) => (
             <motion.li
               key={i}
@@ -315,7 +312,7 @@ function Sections() {
               custom={i}
               variants={fadeUp}
               whileHover={{ y: -2 }}
-              className="rounded-2xl border border-border bg-[color:var(--muted)] p-4 text-sm leading-relaxed"
+              className="rounded-2xl border border-border bg-[color:var(--muted)] p-3.5 sm:p-4 text-sm leading-relaxed"
             >
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[color:var(--muted)] mr-2 text-muted-foreground border border-border">
                 <Trophy className="h-3.5 w-3.5" />
@@ -341,12 +338,12 @@ function Block({
   k: string;
 }) {
   return (
-    <section id={k} className="space-y-6">
+    <section id={k} className="space-y-5 sm:space-y-6">
       <motion.h2
         initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-xl sm:text-2xl font-semibold tracking-tight"
+        className="text-lg sm:text-2xl font-semibold tracking-tight text-balance"
       >
         {title}
       </motion.h2>
@@ -364,15 +361,15 @@ function Timeline({
 }) {
   return (
     <div className="relative">
-      {/* línea central con degradado cálido */}
+      {/* línea central con degradado cálido (oculta en móvil para limpiar) */}
       <div
-        className="absolute left-4 top-0 bottom-0 w-px opacity-40"
+        className="hidden sm:block absolute left-4 top-0 bottom-0 w-px opacity-40"
         style={{
           background:
             "linear-gradient(to bottom, transparent, var(--color-brand-2), transparent)",
         }}
       />
-      <ul className="space-y-6">
+      <ul className="space-y-4 sm:space-y-6">
         {items.map((it, i) => (
           <motion.li
             key={i}
@@ -382,21 +379,21 @@ function Timeline({
             custom={i}
             variants={fadeUp}
             whileHover={{ y: -2 }}
-            className="relative pl-10"
+            className="relative pl-0 sm:pl-10"
           >
             <span
-              className="absolute left-2 top-2 h-3 w-3 rounded-full shadow-[0_0_0_3px_rgba(0,0,0,0.02)]"
+              className="hidden sm:block absolute left-2 top-2 h-3 w-3 rounded-full shadow-[0_0_0_3px_rgba(0,0,0,0.02)]"
               style={{ background: `var(--color-${accent})` }}
             />
-            <div className="rounded-2xl border border-border bg-[color:var(--muted)] p-4">
+            <div className="rounded-2xl border border-border bg-[color:var(--muted)] p-3.5 sm:p-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="font-medium">{it.title}</h3>
+                <h3 className="font-medium text-[15px] sm:text-base">{it.title}</h3>
                 <span className="text-xs text-muted-foreground">{it.period}</span>
               </div>
               <p className="text-sm text-muted-foreground mt-0.5">{it.place}</p>
               <ul className="mt-3 space-y-2 text-sm text-foreground/80">
                 {it.bullets.map((b, j) => (
-                  <li key={j} className="leading-relaxed">
+                  <li key={j} className="leading-relaxed text-pretty">
                     • {b}
                   </li>
                 ))}
@@ -424,7 +421,7 @@ function SkillCloud() {
           custom={i}
           variants={fadeUp}
           whileHover={{ y: -2 }}
-          className="group inline-flex items-center gap-2 rounded-2xl border border-border bg-[color:var(--muted)] px-3 py-1.5 text-sm"
+          className="group inline-flex items-center gap-2 rounded-2xl border border-border bg-[color:var(--muted)] px-3 py-1.5 text-xs sm:text-sm"
         >
           <span
             className="inline-block h-1.5 w-1.5 rounded-full transition"
@@ -439,20 +436,20 @@ function SkillCloud() {
 
 function CTA() {
   return (
-    <div className="rounded-3xl border border-border p-6 sm:p-8 text-center bg-[linear-gradient(180deg,rgba(233,196,106,0.10),rgba(244,162,97,0.10))]">
-      <h3 className="text-lg sm:text-xl font-semibold">¿Conversamos?</h3>
-      <p className="mt-1 text-muted-foreground">
+    <div className="rounded-3xl border border-border p-5 sm:p-6 md:p-8 text-center bg-[linear-gradient(180deg,rgba(233,196,106,0.10),rgba(244,162,97,0.10))]">
+      <h3 className="text-base sm:text-lg md:text-xl font-semibold">¿Conversamos?</h3>
+      <p className="mt-1 text-muted-foreground text-pretty">
         Lista para sumar en Finanzas, Logística o Marketing, con foco en datos y procesos.
       </p>
-      <div className="mt-5 flex items-center justify-center gap-3">
-        <a href={`mailto:${CV.email}`} className="btn-white">
+      <div className="mt-4 sm:mt-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3">
+        <a href={`mailto:${CV.email}`} className="btn-white w-full sm:w-auto justify-center">
           <Mail className="h-4 w-4" />
           Contactar
         </a>
         <a
           href={CV.linkedin}
           target="_blank"
-          className="inline-flex items-center gap-2 rounded-2xl border border-border px-4 py-2 bg-[color:var(--muted)] hover:shadow-[0_8px_24px_rgba(231,111,81,0.12)] transition"
+          className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-2xl border border-border px-4 py-2 bg-[color:var(--muted)] hover:shadow-[0_8px_24px_rgba(231,111,81,0.12)] transition"
         >
           <Linkedin className="h-4 w-4" />
           LinkedIn
@@ -464,8 +461,8 @@ function CTA() {
 
 function Footer() {
   return (
-    <footer className="py-10">
-      <div className="mx-auto max-w-6xl px-4 text-center text-sm text-muted-foreground">
+    <footer className="py-8 sm:py-10">
+      <div className="mx-auto max-w-6xl px-4 text-center text-xs sm:text-sm text-muted-foreground">
         © {new Date().getFullYear()} {CV.name}.
       </div>
     </footer>
